@@ -1,3 +1,23 @@
+<!--
+  Fork notice / 分支说明
+  This repository is decuff's private frozen archive of ARTEX, the autonomous
+  penetration-testing system originally created by Autumn-27.
+
+  Upstream:        Autumn-27/ARTEX  (AGPL-3.0)
+  Pinned release:  v0.3.15 — the last public upstream release
+  Pinned commit:   e6ec56999175509551a1e43a3ee3b053d0941bd9 (2026-10-07)
+  Captured:        before the original repository was taken down on 2026-10-08
+
+  This is an unmodified snapshot of the upstream source at v0.3.15; the only
+  addition is this notice. Distributed under the AGPL-3.0, the same license as
+  upstream. See LICENSE and CHANGELOG.md.
+-->
+
+> **Fork of [`Autumn-27/ARTEX`](https://github.com/Autumn-27/ARTEX) · AGPL-3.0.**
+> decuff's frozen archive of ARTEX, pinned to the last public upstream release
+> **v0.3.15** (commit `e6ec569`, 2026-10-07). Source is unmodified from upstream;
+> only this notice is added.
+
 <div align="center">
 
 # ARTEX
