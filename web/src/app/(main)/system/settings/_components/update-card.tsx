@@ -270,7 +270,7 @@ export function UpdateCard() {
             Updating under Docker only replaces the program itself, not the toolchain (playwright / nmap, etc.) in the image, and
             <span className="font-mono"> docker compose up -d </span>
             after the container is rebuilt it reverts to the version bundled in the image. To upgrade the image as well, run
-            <span className="font-mono"> docker compose pull artex &amp;&amp; docker compose up -d artex</span>。
+            <span className="font-mono"> docker compose pull artex &amp;&amp; docker compose up -d artex</span>.
           </p>
         )}
 

@@ -271,7 +271,7 @@ function RefList({ title, items }: { title: string; items: CoverageAssetRef[] })
   return (
     <div>
       <h4 className="text-muted-foreground mb-1 text-xs font-medium">
-        {title}（{items.length}）
+        {title} ({items.length})
       </h4>
       <div className="flex flex-col gap-1">
         {items.map((r) => (

@@ -164,7 +164,7 @@ func telegramBatchLine(it Item, idx int) string {
 func telegramBatchTitle(m Message, items []Item, total int) string {
 	title := fmt.Sprintf("Vulnerability Summary · %d total", total)
 	if extra := total - len(items); extra > 0 {
-		title += fmt.Sprintf(" (showing first %d, remaining %d continue in next message)", len(items), extra)
+		title += fmt.Sprintf(" (showing %d here, with %d remaining for the next message)", len(items), extra)
 	}
 	if m.WindowMinutes > 0 {
 		title = fmt.Sprintf("Last %d minutes · %s", m.WindowMinutes, title)

@@ -705,7 +705,7 @@ function CustomToolDialog({
               </SelectContent>
             </Select>
             {kind === "shell" && (
-              <p className="text-muted-foreground text-xs">适合 nmap、sqlmap、ffuf 等出名工具——模型已知用法，只需声明"可在 bash 中调用"即可。名称+描述会追加到 Bash 工具描述里。</p>
+              <p className="text-muted-foreground text-xs">The tool name and description appear in the Bash tool listing.</p>
             )}
           </div>
 

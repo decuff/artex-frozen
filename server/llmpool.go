@@ -10,7 +10,7 @@ import (
 	"github.com/Autumn-27/norma/llm"
 )
 
-// Server-side wiring for LLM polling (failover). Design see docs/LLM轮询设计.md:
+// Server-side wiring for LLM polling (failover). See the upstream LLM failover design notes:
 //   - Only the global active-config path (agent unbound, task not pinned) polls;
 //   - The bound/pinned path exclusively uses that config by default, and fails if it fails (fallback can be enabled via llm_pool_bind_fallback);
 //   - Chain order = active config → the rest by priority DESC, excluding those in pool_exclude;

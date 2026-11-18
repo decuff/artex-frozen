@@ -376,7 +376,7 @@ CREATE TABLE IF NOT EXISTS llm_profiles (
     reasoning_effort TEXT NOT NULL DEFAULT '',
     thinking_type    TEXT NOT NULL DEFAULT '',
     is_default       BOOLEAN NOT NULL DEFAULT false,
-    -- Polling (failover) parameters, see docs/LLM轮询设计.md:
+    -- Polling (failover) parameters, see the upstream LLM failover design notes:
     --   priority     order, higher is selected first; the active config (is_default) is always first in the chain, regardless of this value.
     --   pool_exclude true=not used as a failover target (can still be explicitly bound by agent/task).
     priority         INTEGER NOT NULL DEFAULT 0,
@@ -435,7 +435,7 @@ ALTER TABLE llm_profiles ADD  CONSTRAINT llm_profiles_max_tokens_check
 -- Custom session header name; backfills old databases. Default '' = do not send, old config behavior unchanged.
 ALTER TABLE llm_profiles ADD COLUMN IF NOT EXISTS session_header_key TEXT NOT NULL DEFAULT '';
 
--- Per-config retry overrides (see docs/LLM重试设计.md). Each of the three groups has a pair of 'count + fixed interval',
+-- Per-config retry overrides (see the upstream LLM retry design notes). Each of the three groups has a pair of 'count + fixed interval',
 -- with unified semantics: count 0=use global default, -1=disable that layer's retry, >0=use that value; interval 0=use that layer's
 -- default exponential backoff, >0=switch to this fixed number of milliseconds. All default to 0, so old databases/old configs behave unchanged.
 --   connect = connect retry (SDK doStream: connection reset/timeout/429/5xx, before the stream starts)

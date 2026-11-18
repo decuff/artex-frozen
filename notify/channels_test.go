@@ -88,7 +88,7 @@ func TestDingTalkFallsBackToMarkdownForBatch(t *testing.T) {
 			t.Fatalf("summary message should send markdown, got %v", body["msgtype"])
 		}
 		md, _ := body["markdown"].(map[string]any)
-		if !strings.Contains(md["text"].(string), "last 30 minutes") {
+		if !strings.Contains(md["text"].(string), "Last 30 minutes: 3 new findings") {
 			t.Errorf("summary body is missing the time window: %v", md["text"])
 		}
 	})
@@ -251,7 +251,7 @@ func TestWebhookDefaultTemplateProducesValidJSON(t *testing.T) {
 	// This is the point of the default template: when the title contains quotes and newlines, any naive
 	// `"title": "{{.Title}}"` form will produce invalid JSON. Only {{json .}} will not.
 	srv := capturePost(t, `{"ok":true}`, func(t *testing.T, body map[string]any, _ *http.Request) {
-		if body["title"] != `[🟠 High] Login "SQL Injection" risk` {
+		if body["title"] != `[🟠 High] Login "SQL injection" risk` {
 			t.Errorf("title not correctly restored: %v", body["title"])
 		}
 		items, _ := body["items"].([]any)
@@ -259,7 +259,7 @@ func TestWebhookDefaultTemplateProducesValidJSON(t *testing.T) {
 			t.Fatalf("items count should be 1, got %d", len(items))
 		}
 		it, _ := items[0].(map[string]any)
-		if it["summary"] != "param id\nnot filtered causing injection" {
+		if it["summary"] != singleMsg().Items[0].Summary {
 			t.Errorf("summary not correctly restored: %v", it["summary"])
 		}
 		// The value must be a JSON number, not a string (writing json:"...,string" and the like will hit this pitfall).
@@ -280,7 +280,7 @@ func TestWebhookCustomTemplateAndHeaders(t *testing.T) {
 		if body["msg"] != "3 items" {
 			t.Errorf("custom template rendering incorrect: %v", body["msg"])
 		}
-		if body["first"] != "vuln1" {
+		if body["first"] != batchMsg(3).Items[0].Name {
 			t.Errorf("range extraction incorrect: %v", body["first"])
 		}
 	})

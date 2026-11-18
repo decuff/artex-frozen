@@ -130,12 +130,12 @@ func markdownBody(m Message, maxBytes int) (string, int) {
 func markdownBatchIntro(m Message, items []Item, total int) string {
 	var b strings.Builder
 	if m.WindowMinutes > 0 {
-		fmt.Fprintf(&b, "**%d new vulnerabilities in the last %d minutes**", m.WindowMinutes, total)
+		fmt.Fprintf(&b, "**Last %d minutes: %d new findings**", m.WindowMinutes, total)
 	} else {
 		fmt.Fprintf(&b, "**%d new vulnerabilities**", total)
 	}
 	if extra := total - len(items); extra > 0 {
-		fmt.Fprintf(&b, "(this message shows the first %d, the remaining %d will continue in the next message)", len(items), extra)
+		fmt.Fprintf(&b, " (showing %d here, with %d remaining for the next message)", len(items), extra)
 	}
 	// Give the distribution by severity so readers can see at a glance whether there are critical items. Only count those **actually included in this message**
 	// Item, ensuring 'Severity 3' matches the items countable below.

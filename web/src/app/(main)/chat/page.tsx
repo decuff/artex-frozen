@@ -946,7 +946,7 @@ const ConversationItem = React.memo(function ConversationItem({
               </>
             )}
             <span className="shrink-0">
-              {new Date(conv.created_at).toLocaleDateString("zh-CN", {
+              {new Date(conv.created_at).toLocaleDateString("en-US", {
                 month: "numeric",
                 day: "numeric",
                 hour: "2-digit",
@@ -1211,7 +1211,7 @@ export default function ChatPage() {
     if (agentFilter !== null) keys.add(agentFilter);
     return [...keys]
       .map((key) => ({ key, name: agentByKey.get(key)?.name || key, count: counts.get(key) ?? 0 }))
-      .sort((a, b) => a.name.localeCompare(b.name, "zh-CN"));
+      .sort((a, b) => a.name.localeCompare(b.name, "en-US"));
   }, [convs, chatAgents, agentByKey, agentFilter]);
   const conversationCountLabel =
     agentFilter === null ? `Total ${convs.length}` : `${filteredConversations.length} / ${convs.length}`;
@@ -1295,7 +1295,7 @@ export default function ChatPage() {
       if (failed.length > 0) {
         const details = failed
           .slice(0, 3)
-          .map((item) => `#${item.id}（${item.error}）`)
+          .map((item) => `#${item.id} (${item.error})`)
           .join("；");
         toast.error(`${failed.length} conversations failed to delete: ${details}${failed.length > 3 ? " etc." : ""}`);
       }
@@ -1371,7 +1371,7 @@ export default function ChatPage() {
                   <SelectItem value="all">All Agents</SelectItem>
                   {agentFilterOptions.map((agent) => (
                     <SelectItem key={agent.key} value={`agent:${agent.key}`}>
-                      {agent.name}（{agent.count}）
+                      {agent.name} ({agent.count})
                     </SelectItem>
                   ))}
                 </SelectGroup>

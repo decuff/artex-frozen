@@ -151,7 +151,7 @@ const UPLOAD_MARKER = "[Uploaded files (absolute paths)]";
 // Read/Bash-friendly manifest — the worker opens them by path. Keeps one marked block:
 // first upload adds the header, later uploads append bullets under it.
 function appendUploads(desc: string, atts: ChatAttachment[]): string {
-  const bullets = atts.map((a) => `- ${a.abs ?? a.path}（${fmtBytes(a.size)}）`).join("\n");
+  const bullets = atts.map((a) => `- ${a.abs ?? a.path} (${fmtBytes(a.size)})`).join("\n");
   if (desc.includes(UPLOAD_MARKER)) {
     return `${desc.replace(/\s*$/, "")}\n${bullets}\n`;
   }
@@ -636,7 +636,7 @@ export default function TasksPage() {
           total.files_deleted = total.files_deleted || r.files_deleted;
           total.findings_deleted += r.findings_deleted;
           total.llm_records_deleted += r.llm_records_deleted;
-          if (r.cleanup_warning) warnings.push(`#${id}：${r.cleanup_warning}`);
+          if (r.cleanup_warning) warnings.push(`#${id}: ${r.cleanup_warning}`);
           deleted.push(id);
         } catch (e) {
           failed.push({ id, message: (e as Error).message });
@@ -661,7 +661,7 @@ export default function TasksPage() {
       if (failed.length > 0) {
         const head = failed
           .slice(0, 3)
-          .map((f) => `#${f.id}（${f.message}）`)
+          .map((f) => `#${f.id} (${f.message})`)
           .join("；");
         toast.error(`${failed.length} tasks failed to delete: ${head}${failed.length > 3 ? " etc." : ""}`);
       }
@@ -2178,11 +2178,11 @@ function DeleteTaskDialog({
           <AlertDialogDescription className="break-words">
             {task.description ? (
               <>
-                「
+                “
                 <span className="break-all">
                   {task.description.length > 80 ? `${task.description.slice(0, 80)}…` : task.description}
                 </span>
-                」
+                ”
               </>
             ) : (
               "This task"
@@ -2570,7 +2570,7 @@ function companyScopeSummary(company: Company): string {
   if (rows.length === 0) return "No asset scope configured";
   const preview = rows.slice(0, 3).map((row) => {
     const value = row.raw || row.value || row.domain || row.net || "";
-    return `${COMPANY_SCOPE_LABELS[row.kind] ?? row.kind}：${value}`;
+    return `${COMPANY_SCOPE_LABELS[row.kind] ?? row.kind}: ${value}`;
   });
   return `${preview.join(" · ")}${rows.length > preview.length ? ` · ${rows.length - preview.length} more` : ""}`;
 }

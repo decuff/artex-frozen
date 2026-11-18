@@ -423,7 +423,7 @@ export function AgentEditor({ agentKey, onSaved }: { agentKey: string; onSaved?:
                   <span className="text-muted-foreground truncate flex-1">{ver.note}</span>
                   {ver.ts && (
                     <span className="text-muted-foreground/60 shrink-0 tabular-nums">
-                      {new Date(ver.ts).toLocaleDateString("zh-CN", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}
+                      {new Date(ver.ts).toLocaleDateString("en-US", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}
                     </span>
                   )}
                   <Button variant="ghost" size="icon-sm" className="size-6 shrink-0" onClick={() => setViewVer(ver)}>
@@ -456,7 +456,7 @@ export function AgentEditor({ agentKey, onSaved }: { agentKey: string; onSaved?:
                   {viewVer?.note || "(No note)"}
                   {viewVer?.ts && (
                     <span className="ml-2 text-muted-foreground/60">
-                      {new Date(viewVer.ts).toLocaleString("zh-CN")}
+                      {new Date(viewVer.ts).toLocaleString("en-US")}
                     </span>
                   )}
                 </DialogDescription>
@@ -1131,7 +1131,7 @@ function AgentTriggersTab({ agentKey, agent }: { agentKey: string; agent?: Agent
               </div>
               <div className="text-muted-foreground grid gap-0.5 text-xs">
                 {t.interval_sec > 0 && t.interval_message && <div className="line-clamp-1">Interval: {t.interval_message}</div>}
-                {t.on_finding && t.finding_message && <div className="line-clamp-1">finding：{t.finding_message}</div>}
+                {t.on_finding && t.finding_message && <div className="line-clamp-1">Finding: {t.finding_message}</div>}
                 {t.on_goal_met && t.goal_message && <div className="line-clamp-1">Goal: {t.goal_message}</div>}
                 {t.on_task_timeout && t.task_timeout_message && <div className="line-clamp-1">Timeout: {t.task_timeout_message}</div>}
                 {t.on_task_create && t.task_create_message && <div className="line-clamp-1">Task created: {t.task_create_message}</div>}

@@ -59,7 +59,7 @@ func SeverityLabel(severity string) string {
 	}
 }
 
-// StatusLabel translates the disposition status into Chinese for status change messages.
+// StatusLabel translates the disposition status for display in status change messages.
 func StatusLabel(status string) string {
 	switch status {
 	case "pending":

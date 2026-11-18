@@ -49,7 +49,7 @@ import { api } from "@/lib/api";
 import type { LLMRecordItem, LLMRecordDetail, LLMTask } from "@/lib/types";
 
 function fmtTime(ts: string) {
-  return new Date(ts).toLocaleString("zh-CN", {
+  return new Date(ts).toLocaleString("en-US", {
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
@@ -295,7 +295,7 @@ export default function LLMRecordsPage() {
               tasks.map((t) => (
                 <SelectItem key={t.task_id} value={t.task_id}>
                   <span className="font-mono">#{t.task_id}</span>
-                  <span className="ml-2 text-muted-foreground">（{t.count}）</span>
+                  <span className="ml-2 text-muted-foreground">({t.count})</span>
                 </SelectItem>
               ))
             )}

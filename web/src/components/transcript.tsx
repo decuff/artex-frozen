@@ -137,11 +137,11 @@ function ActivityTime({ ts }: { ts: string }) {
   return (
     <time
       dateTime={date.toISOString()}
-      title={date.toLocaleString("zh-CN")}
+      title={date.toLocaleString("en-US")}
       className="text-[10px] text-muted-foreground tabular-nums"
       suppressHydrationWarning
     >
-      {date.toLocaleString("zh-CN", {
+      {date.toLocaleString("en-US", {
         month: "2-digit",
         day: "2-digit",
         hour: "2-digit",
@@ -403,7 +403,7 @@ function ToolBlock({
       if (!live) return;
       setDetail(
         segs
-          .map((x, i) => `【${x.label}】\n${x.label === "Command" ? toolInputText(toolName, parts[i]) : parts[i]}`)
+          .map((x, i) => `[${x.label}]\n${x.label === "Command" ? toolInputText(toolName, parts[i]) : parts[i]}`)
           .join("\n\n"),
       );
       loadedKey.current = detailKey;
@@ -514,7 +514,7 @@ function MessageBlock({
       ),
     ).then((parts) => {
       if (!live) return;
-      setDetail(group.steps.map((s, i) => `【${kindLabel(s.kind)}】\n${parts[i]}`).join("\n\n"));
+      setDetail(group.steps.map((s, i) => `[${kindLabel(s.kind)}]\n${parts[i]}`).join("\n\n"));
       loadedKey.current = detailKey;
     });
     return () => {

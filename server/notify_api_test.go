@@ -241,7 +241,7 @@ func TestNotifyEndToEndRealtimeDelivery(t *testing.T) {
 		t.Fatalf("expected 1 message to be sent, actually %d", hook.count())
 	}
 	text := markdownText(t, hook.last(t))
-	for _, want := range []string{"SQL injection", "high severity", "summary"} {
+	for _, want := range []string{"SQL injection", "High", "Summary"} {
 		if !strings.Contains(text, want) {
 			t.Fatalf("message body is missing %q:\n%s", want, text)
 		}
@@ -427,7 +427,7 @@ func TestNotifyDigestBatchesMultipleFindingsIntoOneMessage(t *testing.T) {
 		t.Fatalf("Three items should be combined into one message, but %d were sent", got)
 	}
 	text := markdownText(t, hook.last(t))
-	if !strings.Contains(text, "recent") || !strings.Contains(text, "3 vulnerabilities") {
+	if !strings.Contains(text, "minutes:") || !strings.Contains(text, "3 new findings") {
 		t.Fatalf("Digest message is missing the count/time window text:\n%s", text)
 	}
 	for i := 1; i <= 3; i++ {
@@ -488,7 +488,7 @@ func TestNotifyStatusChangeDelivery(t *testing.T) {
 	found := false
 	for i := 0; i < hook.count(); i++ {
 		text := markdownText(t, hook.body(t, i))
-		if strings.Contains(text, "status change") && strings.Contains(text, "fixed") {
+		if strings.Contains(text, "Status change") && strings.Contains(text, "Fixed") {
 			found = true
 		}
 	}

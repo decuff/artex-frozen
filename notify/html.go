@@ -53,7 +53,7 @@ func htmlBody(m Message, maxRunes int) string {
 func htmlBatchIntro(m Message) string {
 	var b strings.Builder
 	if m.WindowMinutes > 0 {
-		fmt.Fprintf(&b, `<h2 style="font-size:16px;margin:0 0 4px;">%d new vulnerabilities in the last %d minutes</h2>`, m.WindowMinutes, len(m.Items))
+		fmt.Fprintf(&b, `<h2 style="font-size:16px;margin:0 0 4px;">Last %d minutes: %d new findings</h2>`, m.WindowMinutes, len(m.Items))
 	} else {
 		fmt.Fprintf(&b, `<h2 style="font-size:16px;margin:0 0 4px;">%d new vulnerabilities</h2>`, len(m.Items))
 	}

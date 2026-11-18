@@ -104,12 +104,12 @@ func TestAssetLineOmitsExcess(t *testing.T) {
 	if got := assetLine(nil, 3); got != "" {
 		t.Fatalf("no assets should return empty string, got %q", got)
 	}
-	if got := assetLine([]string{"a", "b"}, 3); got != "a、b" {
+	if got := assetLine([]string{"a", "b"}, 3); got != "a, b" {
 		t.Fatalf("not exceeding limit should list all, got %q", got)
 	}
 	// When exceeding the limit, the total count must be noted, otherwise readers won't know how many assets weren't listed.
 	got := assetLine([]string{"a", "b", "c", "d", "e"}, 2)
-	if !strings.Contains(got, "and 5 more") {
+	if got != "a, b (5 total)" {
 		t.Fatalf("should note total count 5, got %q", got)
 	}
 }
@@ -146,5 +146,12 @@ func TestTruncateHTMLNeverCutsEntity(t *testing.T) {
 		if strings.Contains(got, "&amp\x00") {
 			t.Fatalf("max=%d: malformed entity appeared", max)
 		}
+	}
+}
+
+func TestHTMLDigestTimeWindowAndCount(t *testing.T) {
+	got := htmlBatchIntro(batchMsg(3))
+	if !strings.Contains(got, "Last 30 minutes: 3 new findings") {
+		t.Fatalf("unexpected digest heading: %s", got)
 	}
 }

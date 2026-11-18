@@ -28,16 +28,16 @@ func TestMarkdownBodyPacksWholeItemsWithinByteLimit(t *testing.T) {
 	}
 	// The header must truthfully state how many items this message contains and how many remain — otherwise readers will take the header
 	// number as the total.
-	if !strings.Contains(body, "remaining") || !strings.Contains(body, "continues in the next message") {
+	if !strings.Contains(body, "remaining") || !strings.Contains(body, "next message") {
 		t.Fatalf("header should state how many items are not included in this message:\n%s", body[:minInt(400, len(body))])
 	}
 	// Should only contain the first kept items.
 	for i := 0; i < kept; i++ {
-		if !strings.Contains(body, "bug"+itoa(i+1)) {
+		if !strings.Contains(body, m.Items[i].Name) {
 			t.Fatalf("item %d should be in this message:\n%s", i+1, body)
 		}
 	}
-	if strings.Contains(body, "bug"+itoa(kept+1)) {
+	if strings.Contains(body, m.Items[kept].Name) {
 		t.Fatalf("item %d should not appear (it belongs to the next batch)", kept+1)
 	}
 }
@@ -84,7 +84,7 @@ func TestTelegramPackingUsesRuneBudget(t *testing.T) {
 	if kept <= 0 || kept >= len(m.Items) {
 		t.Fatalf("Should fit only part, got %d", kept)
 	}
-	if !strings.Contains(text, "continued in next message") {
+	if !strings.Contains(text, "remaining for the next message") {
 		t.Fatalf("Should indicate there is remaining content not included:\n%.300s", text)
 	}
 }

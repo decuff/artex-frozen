@@ -47,7 +47,7 @@ import type { Agent, SkillItem, MCPServer, SkillCall, MissingSkill } from "@/lib
 
 function fmtTime(ts?: string) {
   if (!ts) return "Never called";
-  return new Date(ts).toLocaleString("zh-CN", {
+  return new Date(ts).toLocaleString("en-US", {
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
@@ -266,7 +266,7 @@ function SkillsOverview({
         <div className="space-y-2">
           <Label className="text-xs text-muted-foreground">
             Unused Skills
-            {agg.neverUsed.length > 0 && <span className="ml-1 font-normal">（{agg.neverUsed.length}）</span>}
+            {agg.neverUsed.length > 0 && <span className="ml-1 font-normal">({agg.neverUsed.length})</span>}
           </Label>
           {agg.neverUsed.length === 0 ? (
             <p className="text-muted-foreground text-xs">All Skills have been called.</p>

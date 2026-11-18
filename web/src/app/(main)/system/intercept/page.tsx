@@ -369,7 +369,7 @@ function JudgeCard() {
                       <SelectItem value={FOLLOW_ACTIVE}>Follow active config</SelectItem>
                       {profiles.map((p) => (
                         <SelectItem key={p.id} value={p.id}>
-                          {p.name}（{p.model}）
+                          {p.name} ({p.model})
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -634,8 +634,8 @@ export default function InterceptPage() {
           ) : (
             <>
               <Badge variant="secondary" className="shrink-0">{scopeTools.length} tools</Badge>
-              <span className="truncate text-muted-foreground" title={scopeTools.join("、")}>
-                {scopeTools.join("、")}
+              <span className="truncate text-muted-foreground" title={scopeTools.join(", ")}>
+                {scopeTools.join(", ")}
               </span>
             </>
           )}

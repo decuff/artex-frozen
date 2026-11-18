@@ -78,7 +78,7 @@ export function isSameFinding(left: Finding, right: Finding): boolean {
 }
 
 export function fmtTime(ts: string) {
-  return new Date(ts).toLocaleString("zh-CN", {
+  return new Date(ts).toLocaleString("en-US", {
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
@@ -308,11 +308,11 @@ export function FindingsTable({
                           <AlertDialogHeader>
                             <AlertDialogTitle>Delete this vulnerability?</AlertDialogTitle>
                             <AlertDialogDescription className="break-words">
-                              「
+                              “
                               <span className="break-all">
                                 {f.name || f.vulnclass || f.summary || `#${f.finding_id}`}
                               </span>
-                              ' will be permanently deleted, and also removed from the findings list, the task findings Tab, and the exploration graph. This action cannot be undone.
+                              ” will be permanently deleted and removed from the findings list, the task findings Tab, and the exploration graph. This action cannot be undone.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>

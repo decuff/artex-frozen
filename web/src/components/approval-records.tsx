@@ -38,7 +38,7 @@ import { cn } from "@/lib/utils";
 
 function fmtTime(value?: string) {
   if (!value) return "—";
-  return new Date(value).toLocaleString("zh-CN", {
+  return new Date(value).toLocaleString("en-US", {
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
@@ -47,10 +47,13 @@ function fmtTime(value?: string) {
   });
 }
 
+// Older records store the original Chinese marker.
+const modelReasonPrefix = /^\[(?:Model|模型)\]\s*/;
+
 function source(row: InterceptApprovalRow) {
   if (row.decision_source) return row.decision_source;
   if (row.rule_id) return "rule";
-  return row.reason?.startsWith("[Model]") ? "model" : "unknown";
+  return modelReasonPrefix.test(row.reason ?? "") ? "model" : "unknown";
 }
 
 function originLabel(row: InterceptApprovalRow) {
@@ -109,7 +112,7 @@ function StatusBadge({ status }: { status: string }) {
 }
 
 function MatchCell({ row, showReason = true }: { row: InterceptApprovalRow; showReason?: boolean }) {
-  const reason = row.reason?.replace(/^\[Model\]\s*/, "");
+  const reason = row.reason?.replace(modelReasonPrefix, "");
   return (
     <div className="flex min-w-0 flex-col gap-1">
       {source(row) === "model" ? (
@@ -370,7 +373,7 @@ export function ApprovalDetail({
             <MatchCell row={current} showReason={false} />
           </div>
           <p className="whitespace-pre-wrap break-words text-sm leading-7 [overflow-wrap:anywhere]">
-            {current.reason?.replace(/^\[Model\]\s*/, "") || "No approval reason recorded"}
+            {current.reason?.replace(modelReasonPrefix, "") || "No approval reason recorded"}
           </p>
           {audit?.decision_reason ? <p className="text-sm">{audit.decision_reason}</p> : null}
           {audit?.effective_action ? <p className="text-sm">Final action: {actionLabels[audit.effective_action]}</p> : null}
@@ -483,8 +486,8 @@ export function ApprovalDetail({
                 </Collapsible>
               ) : null}
               <CodeBlock
-                label={`${initialLabel}：${actionLabels[audit.initial_action] ?? audit.initial_action}`}
-                text={audit.initial_reason.replace(/^\[Model\]\s*/, "")}
+                label={`${initialLabel}: ${actionLabels[audit.initial_action] ?? audit.initial_action}`}
+                text={audit.initial_reason.replace(modelReasonPrefix, "")}
               />
               <CodeBlock
                 label="Execution output"

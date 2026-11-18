@@ -47,7 +47,7 @@ import type { TrafficDetail, TrafficExchange, TrafficHost, TrafficResp } from "@
 import { cn } from "@/lib/utils";
 
 function fmtTime(ts: string) {
-  return new Date(ts).toLocaleString("zh-CN", {
+  return new Date(ts).toLocaleString("en-US", {
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
@@ -796,7 +796,7 @@ export default function TrafficPage() {
                 <>
                   Will permanently delete <span className="font-semibold tabular-nums">{selectedHosts.length}</span> targets (
                   <span className="font-mono">
-                    {selectedHosts.slice(0, 3).join("、")}
+                    {selectedHosts.slice(0, 3).join(", ")}
                     {selectedHosts.length > 3 ? "…" : ""}
                   </span>
                   ) all traffic records (including request/response raw content), this operation cannot be undone.

@@ -1,6 +1,6 @@
 <!--
   Fork notice / Branch description
-  This repository is decuff's private frozen archive of ARTEX, the autonomous
+  This repository is decuff's frozen archive of ARTEX, the autonomous
   penetration-testing system originally created by Autumn-27.
 
   Upstream:        Autumn-27/ARTEX  (AGPL-3.0)
@@ -8,15 +8,13 @@
   Pinned commit:   e6ec56999175509551a1e43a3ee3b053d0941bd9 (2026-10-07)
   Captured:        before the original repository was taken down on 2026-10-08
 
-  This is an unmodified snapshot of the upstream source at v0.3.15; the only
-  addition is this notice. Distributed under the AGPL-3.0, the same license as
+  This English edition is based on the archived v0.3.15 source. Distributed under the AGPL-3.0, the same license as
   upstream. See LICENSE and CHANGELOG.md.
 -->
 
 > **Fork of [`Autumn-27/ARTEX`](https://github.com/Autumn-27/ARTEX) · AGPL-3.0.**
 > decuff's frozen archive of ARTEX, pinned to the last public upstream release
-> **v0.3.15** (commit `e6ec569`, 2026-10-07). Source is unmodified from upstream;
-> only this notice is added.
+> **v0.3.15** (commit `e6ec569`, 2026-10-07). This edition includes English translations.
 
 <div align="center">
 
@@ -31,9 +29,17 @@ AI autonomous penetration testing system (Go backend + Next.js frontend)
 
 ---
 
-## Screenshot preview
+## Screenshots
 
 > For the full interaction, see the [Online Demo](https://artex-demo.vercel.app/).
+
+![English dashboard showing task counts, findings by severity, and token usage](screenshots/dashboard-en.png)
+
+The dashboard preview uses the bundled July 2026 demo data.
+
+<details>
+<summary>Original upstream screenshots (Chinese interface)</summary>
+
 
 | Dashboard (overview / Token consumption / activity stream) | Task list |
 | :---: | :---: |
@@ -63,6 +69,7 @@ AI autonomous penetration testing system (Go backend + Next.js frontend)
 | :---: | :---: |
 | ![Intercept](screenshots/intercept.png) | ![Logs](screenshots/logs.png) |
 
+</details>
 
 ---
 
@@ -127,7 +134,7 @@ cp config.example.json config.json   # fill in the database connection
 ./start.sh                           # → http://localhost:8787
 ```
 
- > Please start with `start.sh` / `start.bat` rather than running `./artex` directly. It is a supervisor script: after the program exits, it decides based on the exit code whether to restart it; **the [one-click update](#方式一页面一键更新推荐) on the page relies on it to swap in the new version**. If you run `./artex` directly, it won't be restarted after an update.
+ > Please start with `start.sh` / `start.bat` rather than running `./artex` directly. It is a supervisor script: after the program exits, it decides based on the exit code whether to restart it; **the [one-click update](#option-1-one-click-update-from-the-page-recommended) on the page relies on it to swap in the new version**. If you run `./artex` directly, it won't be restarted after an update.
 > Run in the background: `nohup ./start.sh >artex.log 2>&1 &`.
 
 ### Option 4: Compile a single binary from source
