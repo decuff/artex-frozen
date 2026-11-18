@@ -48,7 +48,7 @@ function fmtTime(value?: string) {
 }
 
 // Older records store the original Chinese marker.
-const modelReasonPrefix = /^\[(?:Model|模型)\]\s*/;
+const modelReasonPrefix = /^\[(?:Model|\u6a21\u578b)\]\s*/;
 
 function source(row: InterceptApprovalRow) {
   if (row.decision_source) return row.decision_source;

@@ -63,6 +63,7 @@ func TestAuthInitFailsClosedWhenDataSourceUnavailable(t *testing.T) {
 }
 
 func TestValidatePassword(t *testing.T) {
+	const hanCharacter = "\u5bc6" // One character encoded in three UTF-8 bytes.
 	for _, tc := range []struct {
 		name, pw string
 		wantErr  bool
@@ -70,8 +71,8 @@ func TestValidatePassword(t *testing.T) {
 		{"empty", "", true},
 		{"seven chars", "1234567", true},
 		{"eight chars", "12345678", false},
-		{"eight Chinese characters counted by character count rather than byte count", strings.Repeat("密", 8), false},
-		{"three Chinese characters are 9 bytes but only 3 characters", strings.Repeat("密", 3), true},
+		{"eight Chinese characters counted by character count rather than byte count", strings.Repeat(hanCharacter, 8), false},
+		{"three Chinese characters are 9 bytes but only 3 characters", strings.Repeat(hanCharacter, 3), true},
 		{"72 bytes", strings.Repeat("a", 72), false},
 		{"73 bytes exceeds the bcrypt limit", strings.Repeat("a", 73), true},
 	} {

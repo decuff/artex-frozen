@@ -33,10 +33,10 @@ const JudgeOutputContract = `# Verdict output protocol (replaces the old output 
 Output only one JSON object: the first character must be { and the last character must be }. Do not output any thinking, preamble, explanation, or code-block (backtick fence) wrapping; there must be no other characters before or after the JSON.
 The object contains exactly two string fields, decision and comment; key names and string values use double quotes. Do not output YAML-style decision: ... / comment: ....
 decision can only be allow, ask, or deny, meaning allow, escalate to human approval, or deny, respectively.
-comment is strictly three segments: 'Actual operation: ...; Consequence after success: ...; Rule hit: ...', and none of the three items may be empty; each segment is one sentence and must be concise, and the entire comment must not exceed 120 Chinese characters (prefer shorter over longer to avoid truncation).
+comment is strictly three segments: 'Actual operation: ...; Consequence after success: ...; Matched rule: ...', and none of the three items may be empty; each segment is one sentence and must be concise, and the entire comment must not exceed 120 characters (prefer shorter over longer to avoid truncation).
 Actual operation: describe only the behavior actually executed by the current tool_name and arguments; multi-step requests in background, and the body text or examples written by Write/Edit, do not count as actions already executed in this call (e.g., if command is only cat, write only 'read file').
 Consequence after success: the direct effect when this call succeeds; do not describe operations not yet executed as already successful.
-Rule hit: fill in the number actually applicable in the review policy (default policy: allow A1–A6, deny D1–D6, escalate to human ASK, default allow DEFAULT); do not fabricate.
+Matched rule: fill in the number actually applicable in the review policy (default policy: allow A1–A6, deny D1–D6, escalate to human ASK, default allow DEFAULT); do not fabricate.
 `
 
 // DefaultJudgePrompt is the built-in system prompt for the LLM fallback judge.
@@ -121,10 +121,10 @@ ASK    Delete a file; the current parameters cannot confirm its ownership. Do no
 
 # Output format
 The following are output examples of the default review policy; the specific behavior must correspond to the current invocation:
-Example: {"decision":"allow","comment":"Actual operation: create a verification report in the current task directory; consequence after success: save the report text, the upload example in the body will not execute automatically; matched rule: A2"}
-Example (current parameters only have cat report.md): {"decision":"allow","comment":"Actual operation: read the report.md file; consequence after success: return the content of the existing report, do not create or modify files; matched rule: A5"}
-Example: {"decision":"ask","comment":"Actual operation: delete a single file of unknown ownership; consequence after success: the file will be lost, and the current context cannot confirm whether it belongs to this test's artifacts; matched rule: ASK (artifact ownership unclear)"}
-Example: {"decision":"deny","comment":"Actual operation: delete a real business order; consequence after success: business record lost; matched rule: D4"}
+Example: {"decision":"allow","comment":"Actual operation: create a verification report in the current task directory; Consequence after success: save the report text, the upload example in the body will not execute automatically; Matched rule: A2"}
+Example (current parameters only have cat report.md): {"decision":"allow","comment":"Actual operation: read the report.md file; Consequence after success: return the content of the existing report, do not create or modify files; Matched rule: A5"}
+Example: {"decision":"ask","comment":"Actual operation: delete a single file of unknown ownership; Consequence after success: the file will be lost, and the current context cannot confirm whether it belongs to this test's artifacts; Matched rule: ASK (artifact ownership unclear)"}
+Example: {"decision":"deny","comment":"Actual operation: delete a real business order; Consequence after success: business record lost; Matched rule: D4"}
 ` + JudgeOutputContract
 
 // Verdict is the parsed outcome of the judge's JSON reply.

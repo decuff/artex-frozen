@@ -1,13 +1,14 @@
+// legacyLabel is the original stored label. New labels and history-chip captions use English.
 export const mentionKinds = [
-  { kind: "finding", label: "Finding", alias: "finding" },
-  { kind: "asset", label: "Asset", alias: "asset" },
-  { kind: "company", label: "Company", alias: "company" },
-  { kind: "endpoint", label: "Endpoint", alias: "api" },
-  { kind: "ip", label: "IP", alias: "ip" },
-  { kind: "app", label: "App", alias: "app" },
-  { kind: "root_domain", label: "Domain", alias: "domain" },
-  { kind: "subdomain", label: "Subdomain", alias: "subdomain" },
-  { kind: "service", label: "Service", alias: "service" },
+  { kind: "finding", label: "Finding", legacyLabel: "\u6f0f\u6d1e", alias: "finding" },
+  { kind: "asset", label: "Asset", legacyLabel: "\u8d44\u4ea7", alias: "asset" },
+  { kind: "company", label: "Company", legacyLabel: "\u4f01\u4e1a", alias: "company" },
+  { kind: "endpoint", label: "Endpoint", legacyLabel: "\u63a5\u53e3", alias: "api" },
+  { kind: "ip", label: "IP", legacyLabel: "IP", alias: "ip" },
+  { kind: "app", label: "App", legacyLabel: "\u5e94\u7528", alias: "app" },
+  { kind: "root_domain", label: "Domain", legacyLabel: "\u57df\u540d", alias: "domain" },
+  { kind: "subdomain", label: "Subdomain", legacyLabel: "\u5b50\u57df\u540d", alias: "subdomain" },
+  { kind: "service", label: "Service", legacyLabel: "\u670d\u52a1", alias: "service" },
 ] as const;
 
 export type MentionKind = (typeof mentionKinds)[number]["kind"];
@@ -30,14 +31,17 @@ export function activeMention(value: string, caret: number) {
 export function mentionSearch(query: string) {
   const text = query.trimStart().toLowerCase();
   for (const item of mentionKinds) {
-    for (const alias of [item.label.toLowerCase(), item.alias]) {
+    for (const alias of [item.label.toLowerCase(), item.alias, item.legacyLabel.toLowerCase()]) {
       if (text === alias || text.startsWith(`${alias} `) || (/[^a-z]/.test(alias) && text.startsWith(alias))) {
         return { kind: item.kind, query: query.trimStart().slice(alias.length).trim(), categories: [] };
       }
     }
   }
   const categories = mentionKinds.filter(
-    (item) => item.label.toLowerCase().startsWith(text) || item.alias.startsWith(text),
+    (item) =>
+      item.label.toLowerCase().startsWith(text) ||
+      item.alias.startsWith(text) ||
+      item.legacyLabel.toLowerCase().startsWith(text),
   );
   return { kind: "" as const, query: query.trim(), categories };
 }
@@ -45,18 +49,24 @@ export function mentionSearch(query: string) {
 export function mentionToken(item: ChatMention) {
   const kind = mentionKinds.find((entry) => entry.kind === item.kind)?.label ?? "Asset";
   const label = item.label
-    .replace(/[[\]]/g, (char) => (char === "[" ? "（" : "）"))
+    .replace(/[[\]]/g, (char) => (char === "[" ? "(" : ")"))
     .replace(/\s+/g, " ")
     .slice(0, 100);
   return `@[${kind}#${item.id} ${label}]`;
 }
 
 export function selectedMentions(value: string) {
-  return [...value.matchAll(/@\[(Finding|Asset|Company|Endpoint|IP|App|Domain|Subdomain|Service)#([0-9]+)(?: ([^\]\r\n]*))?\]/g)].map(
-    (match) => ({
+  const mentions = [];
+  for (const match of value.matchAll(/@\[([^#\]\r\n]+)#([0-9]+)(?: ([^\]\r\n]*))?\]/g)) {
+    const entry = mentionKinds.find(
+      (item) => item.label === match[1] || item.kind === match[1] || item.legacyLabel === match[1],
+    );
+    if (!entry) continue;
+    mentions.push({
       token: match[0],
-      label: `${match[1]} #${match[2]}${match[3] ? ` · ${match[3]}` : ""}`,
+      label: `${entry.label} #${match[2]}${match[3] ? ` · ${match[3]}` : ""}`,
       start: match.index,
-    }),
-  );
+    });
+  }
+  return mentions;
 }

@@ -189,9 +189,9 @@ flowchart LR
 }
 ```
 
-**Performance tips (apply to both `list_assets` / `count_assets`):** When a project condition is present, prefer `filter.project` to narrow the scope; in `search`, for indexed fields use `==` exact match or `^` prefix match where possible (see [4.3](#43-search-搜索表达式)), to avoid large-scale `=` fuzzy queries slowing down responses. When there is no project context, adding a project filter is not required.
+**Performance tips (apply to both `list_assets` / `count_assets`):** When a project condition is present, prefer `filter.project` to narrow the scope; in `search`, for indexed fields use `==` exact match or `^` prefix match where possible (see section 4.3), to avoid large-scale `=` fuzzy queries slowing down responses. When there is no project context, adding a project filter is not required.
 
-For the types that support `filter.project`, see the table in [4.4](#44-filter-精确过滤).
+For the types that support `filter.project`, see the table in section 4.4.
 
 ### 4.1 Asset type `asset_type`
 

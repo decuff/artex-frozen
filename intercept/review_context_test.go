@@ -151,7 +151,7 @@ func TestAutomaticAllowRetainsActualReviewContext(t *testing.T) {
 		t.Fatal(err)
 	}
 	raw, _ := json.Marshal(input)
-	reason := "Actual action: read the test file; consequence on success: return file contents; matched rule: A5"
+	reason := "Actual operation: read the test file; Consequence after success: return file contents; Matched rule: A5"
 	a := auditFor(ctx, Decision{Action: "allow", Message: reason, ModelInput: raw, ModelInputDigest: digestInput(raw)}, args, "allowed")
 	var saved ReviewInput
 	if json.Unmarshal(a.ModelInput, &saved) != nil || saved.Background == nil || saved.Background.Text != "please read the file just created" || saved.Version != 4 || a.Correlation != "exact" || a.ToolUseID != "current" || a.InitialReason != reason {

@@ -13,7 +13,7 @@ func TestTruncateBytesKeepsValidUTF8(t *testing.T) {
 	inputs := []string{
 		"Chinese test content",
 		"mixed mixed content content",
-		"a中b文c测d试e",
+		"a—b…c“d”e",
 		"🔴🟠🟡🔵", // 4-byte emoji, wrong cuts are more obvious
 		strings.Repeat("vulnerability", 100),
 	}

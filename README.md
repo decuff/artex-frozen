@@ -31,45 +31,35 @@ AI autonomous penetration testing system (Go backend + Next.js frontend)
 
 ## Screenshots
 
-> For the full interaction, see the [Online Demo](https://artex-demo.vercel.app/).
+The English demo shows fictional review records and July 2026 activity. You can explore the interface in the [online demo](https://artex-demo.vercel.app/).
 
-![English dashboard showing task counts, findings by severity, and token usage](screenshots/dashboard-en.png)
+![Dashboard overview and token usage](screenshots/dashboard-en.png)
 
-The dashboard preview uses the bundled July 2026 demo data.
-
-<details>
-<summary>Original upstream screenshots (Chinese interface)</summary>
-
-
-| Dashboard (overview / Token consumption / activity stream) | Task list |
+| Dashboard and activity feed | Task list |
 | :---: | :---: |
-| ![Dashboard](screenshots/dashboard.png) | ![Tasks](screenshots/tasks.png) |
+| ![Dashboard and activity feed](screenshots/dashboard.png) | ![Task list](screenshots/tasks.png) |
 
-| Task · Execution process (sessions / tool calls) | Exploration graph |
+| Session history | Graph of related records |
 | :---: | :---: |
-| ![Execution process](screenshots/sessions.png) | ![Exploration graph](screenshots/graph.png) |
+| ![Session history](screenshots/sessions.png) | ![Graph of related records](screenshots/graph.png) |
 
-| Findings | Assets |
+| Findings | Asset inventory |
 | :---: | :---: |
-| ![Findings](screenshots/findings.png) | ![Assets](screenshots/assets.png) |
+| ![Findings by status and severity](screenshots/findings.png) | ![Service inventory](screenshots/assets.png) |
 
-| Asset coverage graph (force-directed layout · tested highlighted · nodes collapse/expand) |
-| :---: |
-| ![Asset coverage graph](screenshots/assets_test.png) |
-
-| Traffic recording | Human-in-the-loop conversation |
+| Recorded traffic | Conversation |
 | :---: | :---: |
-| ![Traffic](screenshots/traffic.png) | ![Conversation](screenshots/chat.png) |
+| ![Recorded traffic](screenshots/traffic.png) | ![Conversation about the July review](screenshots/chat.png) |
 
-| Agent management | LLM configuration |
+| Agent directory | Model profiles |
 | :---: | :---: |
-| ![Agent](screenshots/agents.png) | ![LLM](screenshots/llm.png) |
+| ![Agent directory](screenshots/agents.png) | ![Model profiles](screenshots/llm.png) |
 
-| Intercept approval | Backend logs |
+| Approval records | System logs |
 | :---: | :---: |
-| ![Intercept](screenshots/intercept.png) | ![Logs](screenshots/logs.png) |
+| ![Approval records](screenshots/intercept.png) | ![System logs](screenshots/logs.png) |
 
-</details>
+![Asset coverage map with tested assets highlighted](screenshots/assets_test.png)
 
 ---
 

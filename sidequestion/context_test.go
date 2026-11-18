@@ -93,7 +93,7 @@ func TestSideBudgetCountsContentNotJSONCharacters(t *testing.T) {
 		t.Fatal("snapshot mutated")
 	}
 	baseline := EstimateInputTokens(llm.CompletionRequest{Messages: []llm.Message{llm.UserText("x")}})
-	if EstimateInputTokens(llm.CompletionRequest{Messages: []llm.Message{llm.UserText("x")}, System: []string{strings.Repeat("中", 3000)}, Tools: fixture().Tools}) <= baseline+3000 {
+	if EstimateInputTokens(llm.CompletionRequest{Messages: []llm.Message{llm.UserText("x")}, System: []string{strings.Repeat("\u4e2d", 3000)}, Tools: fixture().Tools}) <= baseline+3000 {
 		t.Fatal("system/schema/CJK omitted")
 	}
 }
@@ -106,7 +106,7 @@ func TestSideLongExchangeAndSnapshotCompactionAreBounded(t *testing.T) {
 			if hugeHistory {
 				history = []Exchange{{Ordinal: 1, Question: "earlier", Answer: strings.Repeat("historical evidence ABC", 14000), Status: "completed"}}
 			} else {
-				snap.Request.Messages = append([]llm.Message{llm.UserText(strings.Repeat("old tool evidence 中文", 9000))}, snap.Request.Messages...)
+				snap.Request.Messages = append([]llm.Message{llm.UserText(strings.Repeat("old tool evidence \u4e2d\u6587", 9000))}, snap.Request.Messages...)
 			}
 			original := mustJSON(t, snap)
 			calls, answers := 0, 0
@@ -224,7 +224,7 @@ func TestSideSummaryCancellationAndFailureDoNotAdvanceMemory(t *testing.T) {
 				case "truncated":
 					return assistant("partial"), "length", usage, nil
 				case "too-large":
-					return assistant(strings.Repeat("中", 5000)), "end_turn", usage, nil
+					return assistant(strings.Repeat("\u4e2d", 5000)), "end_turn", usage, nil
 				case "tool":
 					return llm.Message{Role: llm.RoleAssistant, Content: []llm.ContentBlock{{Type: llm.BlockToolUse, ID: "forbidden", Name: "Bash"}}}, "tool_use", usage, nil
 				}
