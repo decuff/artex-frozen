@@ -1,6 +1,6 @@
 <!--
-  Fork notice / 分支说明
-  This repository is decuff's private frozen archive of ARTEX, the autonomous
+  Fork notice
+  This repository is decuff's frozen archive of ARTEX, the autonomous
   penetration-testing system originally created by Autumn-27.
 
   Upstream:        Autumn-27/ARTEX  (AGPL-3.0)
@@ -8,68 +8,65 @@
   Pinned commit:   e6ec56999175509551a1e43a3ee3b053d0941bd9 (2026-10-07)
   Captured:        before the original repository was taken down on 2026-10-08
 
-  This is an unmodified snapshot of the upstream source at v0.3.15; the only
-  addition is this notice. Distributed under the AGPL-3.0, the same license as
+  This translation branch is based on the frozen upstream v0.3.15 snapshot. Distributed under the AGPL-3.0, the same license as
   upstream. See LICENSE and CHANGELOG.md.
 -->
 
 > **Fork of [`Autumn-27/ARTEX`](https://github.com/Autumn-27/ARTEX) · AGPL-3.0.**
 > decuff's frozen archive of ARTEX, pinned to the last public upstream release
-> **v0.3.15** (commit `e6ec569`, 2026-10-07). Source is unmodified from upstream;
-> only this notice is added.
+> **v0.3.15** (commit `e6ec569`, 2026-10-07). This branch includes English translations for account management, approvals, notifications, evidence views, and report exports.
 
 <div align="center">
 
 # ARTEX
 
-AI 自主渗透测试系统（Go 后端 + Next.js 前端）
+Autonomous AI penetration-testing system with a Go backend and a Next.js frontend.
 
 
-🌐 **在线 Demo**： [https://artex-demo.vercel.app/](https://artex-demo.vercel.app/)
+🌐 **[Online demo](https://artex-demo.vercel.app/)**
 
 </div>
 
 ---
 
-## 截图预览
+## Screenshots
 
-> 完整交互见[在线 Demo](https://artex-demo.vercel.app/)。
+> See the [online demo](https://artex-demo.vercel.app/) for the interactive views.
 
-| 仪表盘（总览 / Token 消耗 / 活动流） | 任务列表 |
+| Dashboard (overview, token usage, and activity) | Task list |
 | :---: | :---: |
-| ![仪表盘](screenshots/dashboard.png) | ![任务](screenshots/tasks.png) |
+| ![Dashboard](screenshots/dashboard.png) | ![Tasks](screenshots/tasks.png) |
 
-| 任务 · 执行过程（会话 / 工具调用） | 探索链路 |
+| Task history (sessions and tool calls) | Exploration graph |
 | :---: | :---: |
-| ![执行过程](screenshots/sessions.png) | ![探索链路](screenshots/graph.png) |
+| ![Task history](screenshots/sessions.png) | ![Exploration graph](screenshots/graph.png) |
 
-| 发现 | 资产 |
+| Findings | Assets |
 | :---: | :---: |
-| ![发现](screenshots/findings.png) | ![资产](screenshots/assets.png) |
+| ![Findings](screenshots/findings.png) | ![Assets](screenshots/assets.png) |
 
-| 资产覆盖图（力导向布局 · 已测高亮 · 节点折叠展开） |
+| Asset coverage graph with a force-directed layout, highlighted tested assets, and collapsible nodes |
 | :---: |
-| ![资产覆盖图](screenshots/assets_test.png) |
+| ![Asset coverage graph](screenshots/assets_test.png) |
 
-| 流量录制 | 人在环路对话 |
+| Recorded traffic | Human-in-the-loop chat |
 | :---: | :---: |
-| ![流量](screenshots/traffic.png) | ![对话](screenshots/chat.png) |
+| ![Traffic](screenshots/traffic.png) | ![Chat](screenshots/chat.png) |
 
-| Agent 管理 | LLM 配置 |
+| Agent management | LLM configuration |
 | :---: | :---: |
-| ![Agent](screenshots/agents.png) | ![LLM](screenshots/llm.png) |
+| ![Agents](screenshots/agents.png) | ![LLM configuration](screenshots/llm.png) |
 
-| 拦截审批 | 后端日志 |
+| Approvals | Backend logs |
 | :---: | :---: |
-| ![拦截](screenshots/intercept.png) | ![日志](screenshots/logs.png) |
+| ![Approvals](screenshots/intercept.png) | ![Logs](screenshots/logs.png) |
 
 
 ---
 
-## 审批记录详情
+## Approval details
 
-全局「审批记录」、任务内「拦截审批」及对话中的审批卡片均支持展开查看详情。展示结构参考
-[AegisHook 的审批详情组件](https://github.com/RuoJi6/AegisHook/blob/main/web/src/components/CallDetail.vue)，沿用 ARTEX 的组件和主题：
+Expand an entry in the global approval log, the approvals tab of a task, or an approval card in a conversation to see the details. The layout uses ARTEX components and follows the design of the [AegisHook approval details component](https://github.com/RuoJi6/AegisHook/blob/main/web/src/components/CallDetail.vue).
 
 
 ## 资产同步（ScopeSentry）
@@ -470,50 +467,50 @@ flowchart TB
 
 ---
 
-## 交流群
+## Community
 
-扫码关注微信公众号 **SecSentry**，在公众号后台私信即可入群交流。
+Scan the QR code to follow **SecSentry** on WeChat. Send the official account a private message to join the discussion group.
 
 <div align="center">
 
-<img src="screenshots/wx.png" alt="微信公众号 SecSentry" width="480" />
+<img src="screenshots/wx.png" alt="SecSentry official WeChat account" width="480" />
 
 </div>
 
 ---
-## 参考
+## References
 
 https://github.com/oritera/Cairn
 
 
-## 许可与免责声明
+## License and disclaimer
 
-### 开源协议
+### Open-source license
 
-本项目采用 **GNU Affero General Public License v3.0（AGPL-3.0）** 授权，完整条款见仓库根目录的 [LICENSE](LICENSE) 文件。
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**. See [LICENSE](LICENSE) for the full terms.
 
-这意味着任何人都可以自由使用、修改和分发本项目，但**衍生作品必须同样以 AGPL-3.0 开源**；特别地，**若你修改本项目并通过网络（如部署为在线服务）向用户提供，也必须向这些用户公开对应的完整源码**。
+You may use, modify, and distribute the project. **Derivative works must also be released under AGPL-3.0.** In particular, **if you modify the project and make it available to users over a network, for example as an online service, you must also make the complete corresponding source code available to those users.**
 
-> ⚠️ **重要提示**：开源协议本身不限制软件的使用用途。以下的「使用限制」与「免责声明」是作者对使用者的额外约定与郑重声明，请务必遵守。
+> ⚠️ **Important:** The open-source license itself does not restrict the purposes for which the software may be used. The author sets out additional terms and notices below and asks users to observe them.
 
-**ARTEX 仅供个人学习、代码研究与本地技术验证使用，不得用于对任何线上系统或网站发起实际测试。**
+**ARTEX is for personal learning, source code research, and local technical validation only. Do not use it to test any live system or website.**
 
-### 允许使用范围
+### Permitted uses
 
-- 仅可用于**阅读、学习与研究本项目源码**，以及在**本地隔离环境**中进行技术原理验证；
-- 适用于个人学习、学术研究、代码审阅等非攻击性用途。
+- Read, study, and research the **source code**, or validate technical concepts in an **isolated local environment**.
+- Non-offensive uses include personal learning, academic research, and code review.
 
-### 禁止事项
+### Prohibited uses
 
-- **严禁使用本工具对任何网站、线上服务或联网系统发起扫描、探测、利用或攻击**（无论是否获得授权、是否为自有资产）；
-- 严禁将本工具用于任何实际的渗透测试、攻防对抗或生产环境；
-- 严禁将本工具用于非法入侵、数据窃取、勒索、拒绝服务或任何破坏性、犯罪性活动；
-- 严禁利用本工具从事违反所在国家/地区法律法规的行为。
+- **Do not use this tool to scan, probe, exploit, or attack any website, online service, or network-connected system**, even if you have authorization or own the assets.
+- Do not use it for real-world penetration testing, attack-and-defense exercises, or in production environments.
+- Do not use it for unauthorized access, data theft, extortion, denial of service, or any destructive or criminal activity.
+- Do not use it in violation of the laws or regulations of your jurisdiction.
 
-### 合规责任
+### User responsibility
 
-使用者须自行遵守所在国家/地区关于网络安全、数据保护与计算机犯罪的全部法律法规（在中国大陆包括但不限于《网络安全法》《数据安全法》《个人信息保护法》及相关司法解释）。**因使用本工具产生的一切法律责任与后果，均由使用者自行承担。**
+Users are responsible for complying with all applicable cybersecurity, data protection, and computer crime laws and regulations in their jurisdiction. In mainland China, these include the Cybersecurity Law, the Data Security Law, the Personal Information Protection Law, and related judicial interpretations. **Users bear all legal responsibility and consequences arising from their use of this tool.**
 
-### 免责声明
+### Disclaimer
 
-本项目按“现状（AS IS）”提供，不附带任何明示或默示的担保。作者及贡献者不对使用本工具（无论使用方式是否得当）所导致的任何直接或间接损失、数据丢失、系统损坏或法律纠纷承担责任。**下载、安装或使用本项目，即表示你已阅读、理解并同意上述全部条款。**
+This project is provided “as is,” without any express or implied warranty. The authors and contributors accept no liability for direct or indirect losses, data loss, system damage, or legal disputes arising from use of the tool, whether used properly or otherwise. **By downloading, installing, or using this project, you acknowledge that you have read, understood, and agreed to all of the terms above.**
